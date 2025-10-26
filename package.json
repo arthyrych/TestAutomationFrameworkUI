@@ -1,0 +1,22 @@
+{
+  "name": "test-automation-framework-ui",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test --ui",
+    "allure:clean": "rm -rf allure-results",
+    "allure:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:open": "npx allure open allure-report",
+    "allure:serve": "npx allure serve allure-results"
+  },
+  "author": "Artem Hyrych",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "9.4.0",
+    "@playwright/test": "1.51.0",
+    "allure-commandline": "2.34.0",
+    "allure-playwright": "3.2.2"
+  }
+}

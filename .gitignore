@@ -1,0 +1,14 @@
+# npm
+node_modules/
+
+# test results (raw data)
+test-results/
+
+# test reports (html reporter)
+playwright-report/
+
+# allure results (raw data)
+allure-results/
+
+# allure report
+allure-report/
