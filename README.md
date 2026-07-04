@@ -1,5 +1,17 @@
 # Multi project/product Test Automation Framework (UI)
 
+## Features
+
+<details>
+  <summary>Framework features</summary><br/>
+
+* Multi-product - many products in one repo, sharing base classes
+* E2E flows - full user journeys (login, registration, health check), not isolated features
+* Multi-geo - each flow runs across several geos (locale per geo, optional per-geo proxy)
+* Cross-platform - same flow on web and mobile, Chrome and Safari (Webkit)
+* Data-driven - specs loop over geo lists; user data is faker-generated
+</details>
+
 
 ## Environment
 <details>
@@ -139,7 +151,6 @@ PACKAGES:
 ```
 FOLDER STRUCTURE:
 ```
-* `.github\workflows` contains workflows and yml files for running CI in Github Actions<br/>
 * `test-classes` contains product-based web/mobile classes for use in tests<br/>
 * `test-data` contains global-scoped data (products, proxies, etc) and test-scoped data (users, phones, etc)<br/>
 * `test-suites` contains product-based web/mobile test suites<br/>
@@ -184,7 +195,7 @@ GENERAL APPROACHES:
 ```
 `Geolocations and proxies usage:`
 * Each product has a scope of used geolocations and can be found in the `test-data/products.js` file.
-* All used and available proxies can be found in `test-data/proxies**.js` files, based on the proxies provider.
+* All used and available proxies can be found in the `test-data/proxies.js` file.
 
 `Product and Platform folder segregation:`
 * Each product has a folder under `test-classes` (reusable classes) and `test-suites` (test cases).
@@ -292,43 +303,6 @@ ALLURE REPORTER USAGE DETAILS:
 * After installing Java, you need to set the `JAVA_HOME` environment variable.
 * The way to set the `JAVA_HOME` environment variable differs based on the operating system (please refer to online guides for your OS).
 * In order to verify Java installation, you can run `java -version` in the terminal.
-
-</details>
-
----
-
-<details>
-  <summary>CI</summary><br/>
-
-```
-CI DESCRIPTION:
-```
-For CI we use GitHub Actions.<br/>
-To use CI you need to open the `Actions` tab on the repository page.<br/>
-In the `.github/workflows` folder you can find all available workflows.<br/>
-
-```
-CI WORKFLOWS AND CONFIGS:
-```
-There are the following workflows at the moment:
-1) `HealthCheck (matrix)`<br/>
-Runs all health check (smoke) test suites for all products based on the coverage matrix.<br/>
-Once every job in the workflow is finished you'll get a notification in the Slack `qa-automation-ci` channel.<br/>
-The workflow runs automatically every night and can be triggered manually in the Actions tab.<br/>
-
-2) `Master Run (matrix)`<br/>
-Runs all test suites for all products based on the coverage matrix.<br/>
-Once every job in the workflow is finished you'll get a notification in the Slack `qa-automation-ci` channel.<br/>
-The workflow runs automatically every week (at night from Saturday to Sunday) and can be triggered manually in the Actions tab.<br/>
-
-3) `General (CLI command)`<br/>
-Runs any test suites provided and specified via CLI command.<br/>
-The workflow runs only by manual trigger and is mostly used for debugging.<br/>
-
-4) `General (select product, platform, test suite)`<br/>
-Runs specific test suites provided via predefined inputs.<br/>
-You need to select product, platform and test suite.<br/>
-The workflow runs only by manual trigger and, due to its simplicity, can be used by anyone.<br/>
 
 </details>
 
