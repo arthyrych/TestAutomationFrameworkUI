@@ -1,2 +1,2 @@
-export * from './mobile'
-export * from './web'
+export * from "./mobile"
+export * from "./web"

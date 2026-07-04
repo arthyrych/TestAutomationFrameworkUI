@@ -1,1 +1,1 @@
-export * from './proxyFixture'
+export * from "./proxyFixture"

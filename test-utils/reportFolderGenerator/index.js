@@ -1,1 +1,1 @@
-export * from './reportFolderGenerator'
+export * from "./reportFolderGenerator"

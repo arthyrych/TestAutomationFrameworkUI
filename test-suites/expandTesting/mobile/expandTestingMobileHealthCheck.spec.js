@@ -1,6 +1,6 @@
-import { test } from '../../../test-utils'
-import { expandTesting } from '../../../test-data'
-import { ExpandTestingMobileHealthCheck } from '../../../test-classes'
+import { test } from "../../../test-utils"
+import { expandTesting } from "../../../test-data"
+import { ExpandTestingMobileHealthCheck } from "../../../test-classes"
 
 expandTesting.geos.forEach(geo => {
   test.describe(() => {

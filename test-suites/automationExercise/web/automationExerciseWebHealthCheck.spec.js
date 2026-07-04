@@ -1,6 +1,6 @@
-import { test } from '../../../test-utils'
-import { automationExercise } from '../../../test-data'
-import { AutomationExerciseWebHealthCheck } from '../../../test-classes'
+import { test } from "../../../test-utils"
+import { automationExercise } from "../../../test-data"
+import { AutomationExerciseWebHealthCheck } from "../../../test-classes"
 
 automationExercise.geos.forEach(geo => {
   test.describe(() => {

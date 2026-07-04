@@ -1,5 +1,5 @@
-import { BaseClass } from './baseClass'
-import { users, generateUniquePhone } from '../../test-data'
+import { BaseClass } from "./baseClass"
+import { users, generateUniquePhone } from "../../test-data"
 
 export class BaseRegistration extends BaseClass {
   constructor(page, geo) {
@@ -26,7 +26,7 @@ export class BaseRegistration extends BaseClass {
   async enterEmail() {
     await this.emailInput.fill(this.email)
   }
-  
+
   async enterPassword() {
     await this.passwordInput.fill(this.password)
   }
@@ -59,7 +59,7 @@ export class BaseRegistration extends BaseClass {
   }
 
   async enterFullPhone() {
-    await this.phoneInput.fill('') // Clears input
+    await this.phoneInput.fill("") // Clears input
     await this.phoneInput.fill(this.fullPhone)
   }
 

@@ -1,5 +1,5 @@
-import { BaseClass } from './baseClass'
-import { users } from '../../test-data'
+import { BaseClass } from "./baseClass"
+import { users } from "../../test-data"
 
 export class BaseLogin extends BaseClass {
   constructor(page) {
@@ -21,7 +21,7 @@ export class BaseLogin extends BaseClass {
   async enterEmail() {
     await this.emailInput.fill(this.email)
   }
-  
+
   async enterPassword() {
     await this.passwordInput.fill(this.password)
   }

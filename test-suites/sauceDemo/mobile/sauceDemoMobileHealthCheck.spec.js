@@ -1,6 +1,6 @@
-import { test } from '../../../test-utils'
-import { sauceDemo } from '../../../test-data'
-import { SauceDemoMobileHealthCheck } from '../../../test-classes'
+import { test } from "../../../test-utils"
+import { sauceDemo } from "../../../test-data"
+import { SauceDemoMobileHealthCheck } from "../../../test-classes"
 
 sauceDemo.geos.forEach(geo => {
   test.describe(() => {

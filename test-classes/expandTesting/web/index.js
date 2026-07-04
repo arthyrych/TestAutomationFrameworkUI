@@ -1,2 +1,2 @@
-export * from './expandTestingWebHealthCheck'
-export * from './expandTestingWebLogin'
+export * from "./expandTestingWebHealthCheck"
+export * from "./expandTestingWebLogin"

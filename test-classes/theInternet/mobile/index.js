@@ -1,2 +1,2 @@
-export * from './theInternetMobileHealthCheck'
-export * from './theInternetMobileLogin'
+export * from "./theInternetMobileHealthCheck"
+export * from "./theInternetMobileLogin"

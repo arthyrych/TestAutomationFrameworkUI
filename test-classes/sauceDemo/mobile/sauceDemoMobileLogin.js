@@ -1,5 +1,5 @@
-import { BaseLogin } from '../../base'
-import { users } from '../../../test-data'
+import { BaseLogin } from "../../base"
+import { users } from "../../../test-data"
 
 export class SauceDemoMobileLogin extends BaseLogin {
   constructor(page) {

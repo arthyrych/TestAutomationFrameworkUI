@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker'
+import { faker } from "@faker-js/faker"
 
 export const users = {
   regular: {
@@ -27,7 +27,7 @@ export const users = {
   demo: {
     sauceDemo: { login: "standard_user", password: "secret_sauce" },
     theInternet: { login: "tomsmith", password: "SuperSecretPassword!" },
-    expandTesting: { login: "practice", password: "SuperSecretPassword!" },
+    expandTesting: { login: "practice", password: "SuperSecretPassword!" }
   },
   generateRandom(entity) {
     const UNIX_TIMESTAMP = Date.now()

@@ -1,2 +1,2 @@
-export * from './sauceDemoMobileHealthCheck'
-export * from './sauceDemoMobileLogin'
+export * from "./sauceDemoMobileHealthCheck"
+export * from "./sauceDemoMobileLogin"
