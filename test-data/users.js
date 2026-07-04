@@ -23,6 +23,12 @@ export const users = {
       CVV: "Test CVV" // TBD
     }
   },
+  // Public credentials of the demo practice sites - not secrets
+  demo: {
+    sauceDemo: { login: "standard_user", password: "secret_sauce" },
+    theInternet: { login: "tomsmith", password: "SuperSecretPassword!" },
+    expandTesting: { login: "practice", password: "SuperSecretPassword!" },
+  },
   generateRandom(entity) {
     const UNIX_TIMESTAMP = Date.now()
     switch (entity) {
