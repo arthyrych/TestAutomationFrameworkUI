@@ -156,10 +156,10 @@ Use kebab-case (`test-classes`, `test-data`, `test-suites`, `test-utils`, etc).
 Use camelCase (`base`, `fixtures`, `reportFolderGenerator`, etc).
 
 `Class Files:`<br/>
-Use camelCase with `[product][platform][flow]` pattern (`product1WebLogin.js`, `product1MobileDeposit.js`, etc).
+Use camelCase with `[product][platform][flow]` pattern (`productWebLogin.js`, `productMobileRegistration.js`, etc).
 
 `Test Files (spec files):`<br/>
-Use camelCase with `[product][platform][flow]` pattern (`product1WebLogin.spec.js`, `product1MobileDeposit.spec.js`, etc).
+Use camelCase with `[product][platform][flow]` pattern (`productWebLogin.spec.js`, `productMobileRegistration.spec.js`, etc).
 
 `Other files`:<br/>
 Use camelCase (`products.js`, `proxyFixture.js`, etc).
@@ -171,7 +171,7 @@ Use PascalCase (`BaseLogin`, `BaseHealthCheck`, etc).
 Use camelCase (`enterEmail`, `clickSubmitButton`, etc).
 
 `Test Names:`<br/>
-Use `[Product] - [PLATFORM] - [TestFlow] - [Geo] : [locale]` pattern<br/> (`Product1 - MOBILE - Login - ${geo.name} : ${geo.locale}`, etc).
+Use `[Product] - [PLATFORM] - [TestFlow] - [Geo] : [locale]` pattern<br/> (`Product - MOBILE - Login - ${geo.name} : ${geo.locale}`, etc).
 </details>
 
 ---
@@ -210,15 +210,15 @@ GENERAL APPROACHES:
 ```
 Object-Oriented Programming (OOP) PRINCIPLES:
 ```
-* `Classes and Inheritance:`<br/> The codebase is structured around ES6 classes. There are base classes (`BaseClass`, `BaseHealthCheck`, `BaseLogin`, etc). There are product/platform-specific classes (`Product1WebLogin`, etc) which extend base classes, inheriting and specializing their behavior.
+* `Classes and Inheritance:`<br/> The codebase is structured around ES6 classes. There are base classes (`BaseClass`, `BaseHealthCheck`, `BaseLogin`, etc). There are product/platform-specific classes (`ProductWebLogin`, etc) which extend base classes, inheriting and specializing their behavior.
 * `Encapsulation:`<br/> Each class encapsulates its own selectors and methods for interacting with the UI, keeping state and logic together.
-* `Polymorphism:`<br/> Some methods (`enterPaymentInformation`, etc) are defined in base classes and overridden in subclasses, allowing different implementations for different products/platforms.
-* `Abstraction (partially):`<br/> While JS does not have true abstract classes, our base classes (`BaseDeposit`, etc) use methods that throw errors if not implemented. This is a manual abstraction pattern, forcing subclasses to implement certain methods.
+* `Polymorphism:`<br/> Some methods (`submitPersonalDetails`, `verifyLogin`, etc) are defined in base classes and overridden in subclasses, allowing different implementations for different products/platforms.
+* `Abstraction (partially):`<br/> While JS does not have true abstract classes, base classes define generic flow steps that subclasses override for product-specific behavior. Base classes can also use methods that throw errors until implemented - a manual abstraction pattern forcing subclasses to implement certain methods.
 
 ```
 SOLID PRINCIPLES:
 ```
-* `Single Responsibility Principle (SRP):`<br/> Each class is responsible for a single part of the test logic (login, registration, deposit, etc).
+* `Single Responsibility Principle (SRP):`<br/> Each class is responsible for a single part of the test logic (login, registration, health check, etc).
 * `Open/Closed Principle (OCP):`<br/> Base classes provide default implementations, and new behaviors are added by extending these classes rather than modifying them.
 * `Liskov Substitution Principle (LSP):`<br/> Subclasses can be used in place of base classes (e.g., any `BaseLogin` subclass can be used where a login is needed).
 * `Interface Segregation Principle (ISP) (partially):`<br/> While JS doesn’t have interfaces, the code structure keeps classes focused and avoids forcing them to implement unused methods; there is no strict enforcement - this is by design and convention.
@@ -228,7 +228,7 @@ SOLID PRINCIPLES:
 DESIGN PATTERNS:
 ```
 * `Page Object Model (POM):`<br/> The codebase uses a hybrid POM approach, where reusable classes represent flows or features (not just pages). This is evident in the `test-classes` folder structure and the way classes encapsulate UI interactions.
-* `Template Method Pattern:`<br/> Base classes (`BaseLogin`, `BaseRegistration`, `BaseDeposit`, etc) define the skeleton of operations (`enterEmail`, `enterPassword`, etc) and allow subclasses to override specific steps. For example, the `BaseDeposit` class throws an error for the `enterPaymentInformation` method, forcing subclasses to implement it.
+* `Template Method Pattern:`<br/> Base classes (`BaseLogin`, `BaseRegistration`, etc) define the skeleton of operations (`enterEmail`, `enterPassword`, etc) and allow subclasses to override specific steps. For example, `BaseLogin.verifyLogin` is overridden per product to assert a product-specific success element.
 * `Strategy/Configuration-Driven Pattern:`<br/> Some flows (`registration`, etc) use configuration objects to determine the sequence of steps based on geolocation and the dynamic execution of steps in the `submitPersonalDetails` method.
 * `Fixture Pattern`<br/> Test setup and teardown logic is handled via fixtures, as seen in the `test-utils/fixtures/` directory and the use of Playwright’s fixture system in test files.
 * `Factory Pattern (Implicit):`<br/> While not explicitly named, the way test classes are instantiated based on product/platform/geo in test files is similar to a factory pattern, allowing flexible creation of the right class for the context.
@@ -261,12 +261,12 @@ MOST USED EXAMPLES:
 If you need to run tests in UI mode or debug them:<br/>
 `npm test` or `npx playwright test --ui`<br/><br/>
 If you need to run a specific spec file with pattern `<project><platform><testcase>` (case insensitive):<br/>
-`npx playwright test Product1WebLogin`<br/>
-`npx playwright test product1weblogin`<br/>
-`npx playwright test PRODUCT1WEBLOGIN`<br/><br/>
+`npx playwright test ProductWebLogin`<br/>
+`npx playwright test productweblogin`<br/>
+`npx playwright test PRODUCTWEBLOGIN`<br/><br/>
 In general, grepping is one of the most powerful options for running specific tests (case-insensitive):<br/>
-`npx playwright test product1 -g 'login'`<br/>
-`npx playwright test product1 --grep 'login'`<br/>
+`npx playwright test product -g 'login'`<br/>
+`npx playwright test product --grep 'login'`<br/>
 `npx playwright test --grep 'registration'`<br/>
 `npx playwright test --grep-invert 'registration'`<br/>
 

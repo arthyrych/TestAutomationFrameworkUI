@@ -1,3 +1,4 @@
-export * from './product1'
-export * from './product3'
-export * from './product2'
+export * from './automationExercise'
+export * from './expandTesting'
+export * from './sauceDemo'
+export * from './theInternet'
