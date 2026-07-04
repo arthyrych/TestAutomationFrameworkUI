@@ -1,2 +1,2 @@
-export * from './automationExerciseMobileHealthCheck'
-export * from './automationExerciseMobileRegistration'
+export * from "./automationExerciseMobileHealthCheck"
+export * from "./automationExerciseMobileRegistration"

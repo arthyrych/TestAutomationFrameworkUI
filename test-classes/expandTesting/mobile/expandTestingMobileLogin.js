@@ -1,5 +1,5 @@
-import { BaseLogin } from '../../base'
-import { users } from '../../../test-data'
+import { BaseLogin } from "../../base"
+import { users } from "../../../test-data"
 
 export class ExpandTestingMobileLogin extends BaseLogin {
   constructor(page) {
@@ -7,10 +7,10 @@ export class ExpandTestingMobileLogin extends BaseLogin {
     this.login = users.demo.expandTesting.login
     this.password = users.demo.expandTesting.password
 
-    this.loginInput = this.page.locator('#username')
-    this.passwordInput = this.page.locator('#password')
+    this.loginInput = this.page.locator("#username")
+    this.passwordInput = this.page.locator("#password")
     this.submitButton = this.page.locator('button[type="submit"]')
-    this.successFlash = this.page.locator('#flash.alert-success')
+    this.successFlash = this.page.locator("#flash.alert-success")
   }
 
   // The start page is the login form itself, so there is no login button to click

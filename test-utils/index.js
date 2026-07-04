@@ -1,2 +1,2 @@
-export * from './fixtures'
-export * from './reportFolderGenerator'
+export * from "./fixtures"
+export * from "./reportFolderGenerator"

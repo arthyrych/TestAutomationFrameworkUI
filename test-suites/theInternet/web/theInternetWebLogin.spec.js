@@ -1,6 +1,6 @@
-import { test } from '../../../test-utils'
-import { theInternet } from '../../../test-data'
-import { TheInternetWebLogin } from '../../../test-classes'
+import { test } from "../../../test-utils"
+import { theInternet } from "../../../test-data"
+import { TheInternetWebLogin } from "../../../test-classes"
 
 theInternet.geos.forEach(geo => {
   test.describe(() => {

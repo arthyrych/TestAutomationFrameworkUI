@@ -1,4 +1,4 @@
-import { BaseRegistration } from '../../base'
+import { BaseRegistration } from "../../base"
 
 export class AutomationExerciseWebRegistration extends BaseRegistration {
   constructor(page, geo) {

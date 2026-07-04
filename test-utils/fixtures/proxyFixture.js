@@ -1,9 +1,9 @@
-import { test as base } from '@playwright/test'
+import { test as base } from "@playwright/test"
 
 export const test = base.extend({
   // Overwrites the existing 'page' fixture
   page: async ({ geo, browser }, use) => {
-    if (!geo) throw new Error('Geo fixture is missing.')
+    if (!geo) throw new Error("Geo fixture is missing.")
 
     const contextOptions = { locale: geo.locale }
 
@@ -12,9 +12,9 @@ export const test = base.extend({
       let proxiesIR
       try {
         // Lazy import: the credential file only has to exist when a proxied geo runs
-        proxiesIR = (await import('../../test-data/proxiesIR.js')).proxiesIR
+        proxiesIR = (await import("../../test-data/proxiesIR.js")).proxiesIR
       } catch {
-        throw new Error('test-data/proxiesIR.js is missing - it is required to run non-demo products (see CLAUDE.md).')
+        throw new Error("test-data/proxiesIR.js is missing - it is required to run non-demo products (see CLAUDE.md).")
       }
 
       // Selects a proxy from the list based on the 'geo' in the test
@@ -37,5 +37,5 @@ export const test = base.extend({
     // Passes the created page into the test
     await use(page)
   },
-  geo: undefined, // Geo fixture is meant to be overridden in the test
+  geo: undefined // Geo fixture is meant to be overridden in the test
 })

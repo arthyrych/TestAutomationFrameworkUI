@@ -1,5 +1,5 @@
-import { defineConfig, devices } from '@playwright/test'
-import { generateReportFolder } from './test-utils'
+import { defineConfig, devices } from "@playwright/test"
+import { generateReportFolder } from "./test-utils"
 
 export default defineConfig({
   retries: 2,
@@ -7,30 +7,30 @@ export default defineConfig({
   workers: process.env.CI ? 2 : 2,
   timeout: 90000,
   reporter: [
-    ['list', { open: 'never' }], // console report
-    ['html', { open: 'never', outputFolder: generateReportFolder() }], // HTML report
-    ['allure-playwright'], // allure report
+    ["list", { open: "never" }], // console report
+    ["html", { open: "never", outputFolder: generateReportFolder() }], // HTML report
+    ["allure-playwright"] // allure report
   ],
   projects: [
     {
-      name: 'Desktop Chrome',
+      name: "Desktop Chrome",
       grep: /WEB/,
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices["Desktop Chrome"] }
     },
     {
-      name: 'Desktop Safari',
+      name: "Desktop Safari",
       grep: /WEB/,
-      use: { ...devices['Desktop Safari'] },
+      use: { ...devices["Desktop Safari"] }
     },
     {
-      name: 'Mobile Chrome',
+      name: "Mobile Chrome",
       grep: /MOBILE/,
-      use: { ...devices['Pixel 7'] },
+      use: { ...devices["Pixel 7"] }
     },
     {
-      name: 'Mobile Safari',
+      name: "Mobile Safari",
       grep: /MOBILE/,
-      use: { ...devices['iPhone 12'] },
-    },
+      use: { ...devices["iPhone 12"] }
+    }
   ]
 })
