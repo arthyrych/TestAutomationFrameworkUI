@@ -1,5 +1,5 @@
 # Use Node.js as the base image
-FROM mcr.microsoft.com/playwright:v1.53.0-noble
+FROM mcr.microsoft.com/playwright:v1.61.0-noble
 
 # Set the working directory
 WORKDIR /app

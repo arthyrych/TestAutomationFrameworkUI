@@ -1,3 +1,4 @@
+export * from "./deviceConfigs"
 export * from "./phones"
 export * from "./products"
 export * from "./proxies"
