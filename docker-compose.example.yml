@@ -1,0 +1,10 @@
+services:
+  taf:
+    image: taf:latest
+    volumes:
+      - taf-reports:/app/playwright-report
+    command: npx playwright test healthcheck
+
+volumes:
+  taf-reports:
+    driver: local

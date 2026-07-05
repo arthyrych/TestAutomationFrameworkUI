@@ -15,8 +15,8 @@ export class BaseClass {
     await this.page.waitForLoadState("networkidle")
   }
 
-  async elementIsVisible(element) {
-    await expect(element).toBeVisible({ timeout: 30000 })
+  async elementIsVisible(element, timeout = 30000) {
+    await expect(element).toBeVisible({ timeout })
   }
 
   async closeModal(modalCloseButton) {
@@ -27,17 +27,15 @@ export class BaseClass {
   }
 
   async closeModalWithTimeout(modalCloseButton, timeout = 2000) {
-    const interval = 200 // Check every 200ms
-    let elapsedTime = 0
+    // The modal is optional - if it does not appear or close within the timeout, continue silently
+    const appeared = await modalCloseButton
+      .waitFor({ state: "visible", timeout })
+      .then(() => true)
+      .catch(() => false)
+    if (!appeared) return
 
-    while (elapsedTime < timeout) {
-      if (await modalCloseButton.isVisible()) {
-        await modalCloseButton.click()
-        await modalCloseButton.waitFor({ state: "hidden" })
-        return
-      }
-      await this.page.waitForTimeout(interval)
-      elapsedTime += interval
-    }
+    // Best-effort close - a visible button can still be covered mid-animation, so bound the click
+    await modalCloseButton.click({ timeout }).catch(() => {})
+    await modalCloseButton.waitFor({ state: "hidden", timeout }).catch(() => {})
   }
 }
