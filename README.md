@@ -150,6 +150,14 @@ PACKAGES:
 `allure-playwright` ("bridge" package that helps to gather raw test runs data from Playwright):
 
 - Collects detailed test data (steps, screenshots, logs, etc.), and saves it in a format that Allure understands<br/>
+
+`eslint` (+ `eslint-plugin-playwright`, `eslint-config-prettier`) - finds code problems:
+
+- Checks code for bugs and bad patterns<br/>
+
+`prettier` - formats code:
+
+- Auto-formats all files to one style (no semicolons, double quotes, 2 spaces)<br/>
   <br/>
 
 ```
@@ -157,9 +165,10 @@ FOLDER STRUCTURE:
 ```
 
 - `test-classes` contains product-based web/mobile classes for use in tests<br/>
-- `test-data` contains global-scoped data (products, proxies, etc) and test-scoped data (users, phones, etc)<br/>
+- `test-data` contains global-scoped data (products, proxies, device configs, etc) and test-scoped data (users, phones, etc)<br/>
 - `test-suites` contains product-based web/mobile test suites<br/>
 - `test-utils` contains fixtures (for setting up the test environment) and other global helpers<br/>
+- `.github/workflows` contains the CI workflow (manual run, runs all tests, uploads report)<br/>
   <br/>
 
 ```
@@ -239,7 +248,7 @@ Object-Oriented Programming (OOP) PRINCIPLES:
 - `Classes and Inheritance:`<br/> The codebase is structured around ES6 classes. There are base classes (`BaseClass`, `BaseHealthCheck`, `BaseLogin`, etc). There are product/platform-specific classes (`ProductWebLogin`, etc) which extend base classes, inheriting and specializing their behavior.
 - `Encapsulation:`<br/> Each class encapsulates its own selectors and methods for interacting with the UI, keeping state and logic together.
 - `Polymorphism:`<br/> Some methods (`submitPersonalDetails`, `verifyLogin`, etc) are defined in base classes and overridden in subclasses, allowing different implementations for different products/platforms.
-- `Abstraction (partially):`<br/> While JS does not have true abstract classes, base classes define generic flow steps that subclasses override for product-specific behavior. Base classes can also use methods that throw errors until implemented - a manual abstraction pattern forcing subclasses to implement certain methods.
+- `Abstraction (partially):`<br/> While JS does not have true abstract classes, base classes define generic flow steps that subclasses override for product-specific behavior.
 
 ```
 SOLID PRINCIPLES:
@@ -257,9 +266,8 @@ DESIGN PATTERNS:
 
 - `Page Object Model (POM):`<br/> The codebase uses a hybrid POM approach, where reusable classes represent flows or features (not just pages). This is evident in the `test-classes` folder structure and the way classes encapsulate UI interactions.
 - `Template Method Pattern:`<br/> Base classes (`BaseLogin`, `BaseRegistration`, etc) define the skeleton of operations (`enterEmail`, `enterPassword`, etc) and allow subclasses to override specific steps. For example, `BaseLogin.verifyLogin` is overridden per product to assert a product-specific success element.
-- `Strategy/Configuration-Driven Pattern:`<br/> Some flows (`registration`, etc) use configuration objects to determine the sequence of steps based on geolocation and the dynamic execution of steps in the `submitPersonalDetails` method.
-- `Fixture Pattern`<br/> Test setup and teardown logic is handled via fixtures, as seen in the `test-utils/fixtures/` directory and the use of Playwright’s fixture system in test files.
-- `Factory Pattern (Implicit):`<br/> While not explicitly named, the way test classes are instantiated based on product/platform/geo in test files is similar to a factory pattern, allowing flexible creation of the right class for the context.
+- `Configuration-Driven Setup:`<br/> `test-data/deviceConfigs.js` holds UA/viewport presets (`dc`/`ds`/`mc`/`ms`) that `playwright.config.js` feeds to the four browser projects.
+- `Fixture Pattern:`<br/> Test setup and teardown logic is handled via fixtures, as seen in the `test-utils/fixtures/` directory and the use of Playwright’s fixture system in test files.
 
 </details>
 
@@ -283,6 +291,15 @@ TEST RUN COMMANDS AND OPTIONS:
 `npx playwright test --grep-invert 'login'` - runs tests without "Login" in their title.<br/>
 `npx playwright test --workers=2` - sets the number of parallel workers (default: number of CPU cores).<br/>
 `npx playwright test --help` - shows all available options.<br/>
+
+```
+LINT AND FORMAT COMMANDS:
+```
+
+`npm run lint` - check code for problems (eslint).<br/>
+`npm run lint:fix` - auto-fix code problems.<br/>
+`npm run format` - format all files (prettier).<br/>
+`npm run format:check` - check formatting without changing files.<br/>
 
 ```
 MOST USED EXAMPLES:
@@ -372,6 +389,12 @@ CLEANUP COMMANDS:
 `docker image prune` - remove all unused images.<br/>
 `docker builder prune` - remove build cache data.<br/>
 `docker system prune` - remove everything unused.<br/>
+
+```
+DOCKER COMPOSE:
+```
+
+`docker-compose.example.yml` - starter compose file. Copy it, tweak, then run `docker compose up`.<br/>
 
 </details>
 
