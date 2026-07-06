@@ -34,5 +34,12 @@ export default [
       "playwright/no-skipped-test": "off"
     }
   },
-  prettier
+  prettier,
+  {
+    // re-enabled after the prettier config - catches long lines Prettier will not wrap;
+    // strings/URLs exempt (user-agent strings cannot be wrapped without concatenation)
+    rules: {
+      "max-len": ["error", { code: 120, ignoreStrings: true, ignoreUrls: true }]
+    }
+  }
 ]

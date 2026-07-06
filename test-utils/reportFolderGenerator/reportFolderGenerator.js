@@ -3,7 +3,10 @@ import path from "path"
 
 export function generateReportFolder(baseDir = "playwright-report") {
   const now = new Date()
-  const folderName = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}_${String(now.getHours()).padStart(2, "0")}-${String(now.getMinutes()).padStart(2, "0")}-${String(now.getSeconds()).padStart(2, "0")}`
+  const pad = value => String(value).padStart(2, "0")
+  const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`
+  const time = `${pad(now.getHours())}-${pad(now.getMinutes())}-${pad(now.getSeconds())}`
+  const folderName = `${date}_${time}`
 
   const fullPath = path.join(baseDir, folderName)
 

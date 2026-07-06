@@ -63,7 +63,8 @@ Steps for adding the SSH key:
 Steps for cloning the repository and installing dependencies:
 ```
 
-1. Navigate to a folder where the Test Automation Framework (TAF) will be stored, and run in your terminal a copied link (with SSH key):<br/>
+1. Navigate to a folder where the Test Automation Framework (TAF) will be stored, and run in your terminal
+   a copied link (with SSH key):<br/>
    `git clone ...`
 
 2. Navigate into the downloaded repository folder:<br/>
@@ -81,7 +82,8 @@ Steps for cloning the repository and installing dependencies:
 <details>
   <summary>Git conventions</summary><br/>
 
-For simplicity, we use branch and commit naming similar to CRUD (Create, Read, Update, Delete) operations when possible.<br/>
+For simplicity, we use branch and commit naming similar to CRUD (Create, Read, Update, Delete) operations
+when possible.<br/>
 
 There will be exceptions, and if you have any doubts, don't hesitate to ask colleagues for clarification.<br/>
 
@@ -145,7 +147,8 @@ PACKAGES:
 
 `allure-commandline` (package that converts raw test runs data into Allure reports):
 
-- Takes raw result files and turns them into a human-friendly, visual report you can open and explore in your browser<br/>
+- Takes raw result files and turns them into a human-friendly, visual report you can open and explore
+  in your browser<br/>
 
 `allure-playwright` ("bridge" package that helps to gather raw test runs data from Playwright):
 
@@ -165,7 +168,8 @@ FOLDER STRUCTURE:
 ```
 
 - `test-classes` contains product-based web/mobile classes for use in tests<br/>
-- `test-data` contains global-scoped data (products, proxies, device configs, etc) and test-scoped data (users, phones, etc)<br/>
+- `test-data` contains global-scoped data (products, proxies, device configs, etc) and test-scoped data
+  (users, phones, etc)<br/>
 - `test-suites` contains product-based web/mobile test suites<br/>
 - `test-utils` contains fixtures (for setting up the test environment) and other global helpers<br/>
 - `.github/workflows` contains the CI workflow (manual run, runs all tests, uploads report)<br/>
@@ -185,7 +189,8 @@ Use camelCase (`base`, `fixtures`, `reportFolderGenerator`, etc).
 Use camelCase with `[product][platform][flow]` pattern (`productWebLogin.js`, `productMobileRegistration.js`, etc).
 
 `Test Files (spec files):`<br/>
-Use camelCase with `[product][platform][flow]` pattern (`productWebLogin.spec.js`, `productMobileRegistration.spec.js`, etc).
+Use camelCase with `[product][platform][flow]` pattern (`productWebLogin.spec.js`,
+`productMobileRegistration.spec.js`, etc).
 
 `Other files`:<br/>
 Use camelCase (`products.js`, `proxyFixture.js`, etc).
@@ -197,7 +202,8 @@ Use PascalCase (`BaseLogin`, `BaseHealthCheck`, etc).
 Use camelCase (`enterEmail`, `clickSubmitButton`, etc).
 
 `Test Names:`<br/>
-Use `[Product] - [PLATFORM] - [TestFlow] - [Geo] : [locale]` pattern<br/> (`Product - MOBILE - Login - ${geo.name} : ${geo.locale}`, etc).
+Use `[Product] - [PLATFORM] - [TestFlow] - [Geo] : [locale]` pattern<br/>
+(`Product - MOBILE - Login - ${geo.name} : ${geo.locale}`, etc).
 
 </details>
 
@@ -245,29 +251,46 @@ GENERAL APPROACHES:
 Object-Oriented Programming (OOP) PRINCIPLES:
 ```
 
-- `Classes and Inheritance:`<br/> The codebase is structured around ES6 classes. There are base classes (`BaseClass`, `BaseHealthCheck`, `BaseLogin`, etc). There are product/platform-specific classes (`ProductWebLogin`, etc) which extend base classes, inheriting and specializing their behavior.
-- `Encapsulation:`<br/> Each class encapsulates its own selectors and methods for interacting with the UI, keeping state and logic together.
-- `Polymorphism:`<br/> Some methods (`submitPersonalDetails`, `verifyLogin`, etc) are defined in base classes and overridden in subclasses, allowing different implementations for different products/platforms.
-- `Abstraction (partially):`<br/> While JS does not have true abstract classes, base classes define generic flow steps that subclasses override for product-specific behavior.
+- `Classes and Inheritance:`<br/> The codebase is structured around ES6 classes. There are base classes (`BaseClass`,
+  `BaseHealthCheck`, `BaseLogin`, etc). There are product/platform-specific classes (`ProductWebLogin`, etc) which
+  extend base classes, inheriting and specializing their behavior.
+- `Encapsulation:`<br/> Each class encapsulates its own selectors and methods for interacting with the UI, keeping
+  state and logic together.
+- `Polymorphism:`<br/> Some methods (`submitPersonalDetails`, `verifyLogin`, etc) are defined in base classes and
+  overridden in subclasses, allowing different implementations for different products/platforms.
+- `Abstraction (partially):`<br/> While JS does not have true abstract classes, base classes define generic flow steps
+  that subclasses override for product-specific behavior.
 
 ```
 SOLID PRINCIPLES:
 ```
 
-- `Single Responsibility Principle (SRP):`<br/> Each class is responsible for a single part of the test logic (login, registration, health check, etc).
-- `Open/Closed Principle (OCP):`<br/> Base classes provide default implementations, and new behaviors are added by extending these classes rather than modifying them.
-- `Liskov Substitution Principle (LSP):`<br/> Subclasses can be used in place of base classes (e.g., any `BaseLogin` subclass can be used where a login is needed).
-- `Interface Segregation Principle (ISP) (partially):`<br/> While JS doesn’t have interfaces, the code structure keeps classes focused and avoids forcing them to implement unused methods; there is no strict enforcement - this is by design and convention.
-- `Dependency Inversion Principle (DIP):`<br/> Test data and configuration are injected into classes (e.g., via constructor parameters), rather than hardcoded.
+- `Single Responsibility Principle (SRP):`<br/> Each class is responsible for a single part of the test logic (login,
+  registration, health check, etc).
+- `Open/Closed Principle (OCP):`<br/> Base classes provide default implementations, and new behaviors are added by
+  extending these classes rather than modifying them.
+- `Liskov Substitution Principle (LSP):`<br/> Subclasses can be used in place of base classes (e.g., any `BaseLogin`
+  subclass can be used where a login is needed).
+- `Interface Segregation Principle (ISP) (partially):`<br/> While JS doesn’t have interfaces, the code structure keeps
+  classes focused and avoids forcing them to implement unused methods; there is no strict enforcement - this is by
+  design and convention.
+- `Dependency Inversion Principle (DIP):`<br/> Test data and configuration are injected into classes (e.g., via
+  constructor parameters), rather than hardcoded.
 
 ```
 DESIGN PATTERNS:
 ```
 
-- `Page Object Model (POM):`<br/> The codebase uses a hybrid POM approach, where reusable classes represent flows or features (not just pages). This is evident in the `test-classes` folder structure and the way classes encapsulate UI interactions.
-- `Template Method Pattern:`<br/> Base classes (`BaseLogin`, `BaseRegistration`, etc) define the skeleton of operations (`enterEmail`, `enterPassword`, etc) and allow subclasses to override specific steps. For example, `BaseLogin.verifyLogin` is overridden per product to assert a product-specific success element.
-- `Configuration-Driven Setup:`<br/> `test-data/deviceConfigs.js` holds UA/viewport presets (`dc`/`ds`/`mc`/`ms`) that `playwright.config.js` feeds to the four browser projects.
-- `Fixture Pattern:`<br/> Test setup and teardown logic is handled via fixtures, as seen in the `test-utils/fixtures/` directory and the use of Playwright’s fixture system in test files.
+- `Page Object Model (POM):`<br/> The codebase uses a hybrid POM approach, where reusable classes represent flows or
+  features (not just pages). This is evident in the `test-classes` folder structure and the way classes encapsulate
+  UI interactions.
+- `Template Method Pattern:`<br/> Base classes (`BaseLogin`, `BaseRegistration`, etc) define the skeleton of
+  operations (`enterEmail`, `enterPassword`, etc) and allow subclasses to override specific steps. For example,
+  `BaseLogin.verifyLogin` is overridden per product to assert a product-specific success element.
+- `Configuration-Driven Setup:`<br/> `test-data/deviceConfigs.js` holds UA/viewport presets (`dc`/`ds`/`mc`/`ms`)
+  that `playwright.config.js` feeds to the four browser projects.
+- `Fixture Pattern:`<br/> Test setup and teardown logic is handled via fixtures, as seen in the `test-utils/fixtures/`
+  directory and the use of Playwright’s fixture system in test files.
 
 </details>
 
@@ -331,7 +354,8 @@ USED REPORTERS:
 There are several main reporters used in the framework:<br/>
 `list` - console reporter shows test results in the console (directly in the terminal)<br/>
 `html` - HTML reporter generates a report in the `playwright-report` folder and can be opened in the browser<br/>
-`allure-reporter` - Allure Reporter includes several relevant npm packages for generating reports in the Allure format.<br/>
+`allure-reporter` - Allure Reporter includes several relevant npm packages for generating reports
+in the Allure format.<br/>
 
 ```
 ALLURE REPORTER USAGE DETAILS:
@@ -339,7 +363,8 @@ ALLURE REPORTER USAGE DETAILS:
 
 - For Allure Reporter to work properly, you need to install Java - [download][6]
 - After installing Java, you need to set the `JAVA_HOME` environment variable.
-- The way to set the `JAVA_HOME` environment variable differs based on the operating system (please refer to online guides for your OS).
+- The way to set the `JAVA_HOME` environment variable differs based on the operating system
+  (please refer to online guides for your OS).
 - In order to verify Java installation, you can run `java -version` in the terminal.
 
 </details>
